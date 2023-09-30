@@ -22,19 +22,65 @@
 // TODO: Add code to display the current date in the header of the page.
 $(function () {
 	let hours = [
-		{ id: $("#hour-9"), value: 9, button: $("#hour-9").find("button") },
-		{ id: $("#hour-10"), value: 10, button: $("#hour-10").find("button") },
-		{ id: $("#hour-11"), value: 11, button: $("#hour-11").find("button") },
-		{ id: $("#hour-12"), value: 12, button: $("#hour-12").find("button") },
-		{ id: $("#hour-13"), value: 13, button: $("#hour-13").find("button") },
-		{ id: $("#hour-14"), value: 14, button: $("#hour-14").find("button") },
-		{ id: $("#hour-15"), value: 15, button: $("#hour-15").find("button") },
-		{ id: $("#hour-16"), value: 16, button: $("#hour-16").find("button") },
-		{ id: $("#hour-17"), value: 17, button: $("#hour-17").find("button") },
+		{
+			id: $("#hour-9"),
+			value: 9,
+			button: $("#hour-9").find("button"),
+			task: $("#hour-9").find("textarea"),
+		},
+		{
+			id: $("#hour-10"),
+			value: 10,
+			button: $("#hour-10").find("button"),
+			task: $("#hour-10").find("textarea"),
+		},
+		{
+			id: $("#hour-11"),
+			value: 11,
+			button: $("#hour-11").find("button"),
+			task: $("#hour-11").find("textarea"),
+		},
+		{
+			id: $("#hour-12"),
+			value: 12,
+			button: $("#hour-12").find("button"),
+			task: $("#hour-12").find("textarea"),
+		},
+		{
+			id: $("#hour-13"),
+			value: 13,
+			button: $("#hour-13").find("button"),
+			task: $("#hour-13").find("textarea"),
+		},
+		{
+			id: $("#hour-14"),
+			value: 14,
+			button: $("#hour-14").find("button"),
+			task: $("#hour-14").find("textarea"),
+		},
+		{
+			id: $("#hour-15"),
+			value: 15,
+			button: $("#hour-15").find("button"),
+			task: $("#hour-15").find("textarea"),
+		},
+		{
+			id: $("#hour-16"),
+			value: 16,
+			button: $("#hour-16").find("button"),
+			task: $("#hour-16").find("textarea"),
+		},
+		{
+			id: $("#hour-17"),
+			value: 17,
+			button: $("#hour-17").find("button"),
+			task: $("#hour-17").find("textarea"),
+		},
 	];
-	let currentDay = $("#currentDay");
-	let currentTime = $("<p></p>");
-	let currentHourValue = currentTime.text().slice(0, 2);
+	const currentDay = $("#currentDay");
+	const currentTime = $("<p></p>");
+	const currentHourValue = currentTime.text().slice(0, 2);
+
 	setInterval(function () {
 		let now = dayjs();
 		let formattedDate = now.format("ddd, MMMM D");
@@ -52,8 +98,17 @@ $(function () {
 			? element.id.addClass("present")
 			: element.id.addClass("future");
 	});
+	let savedTasks;
+	const agendaTasksSave = (index) => {
+		savedTasks = JSON.parse(window.localStorage.getItem("task")) || [];
+		const tasks = hours[index].task.val();
+		savedTasks.push(tasks);
+		window.localStorage.setItem("task" + (index + 1), JSON.stringify(savedTasks));
+	};
 
-  hours.button.click(function (index) {
-    localStorage.setItem(hours[index].value,)
-  })
+	hours.forEach((element, index) => {
+		element.button.click(function () {
+			agendaTasksSave(index);
+		});
+	});
 });
