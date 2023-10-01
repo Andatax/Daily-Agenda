@@ -14,6 +14,9 @@ Color code for tasks:
      Currently happening: Green
 
      Future: Blue
+## URL to deployed App 
+
+https://andatax.github.io/Daily-Agenda/ 
 
 ## Screenshot of the UI of the web application
 
